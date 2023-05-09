@@ -1,8 +1,7 @@
 $((function () {
     function refresh() {
         let role = $("#role")
-        let name = $("#name")
-        $.getJSON("showUsers.php", {role: role.val(), name: name.val()}, function (json) {
+        $.getJSON("showUsers.php", {role: role.val()}, function (json) {
             $("table tr:gt(0)").remove()
             json.forEach(function (thing) {
                 $("table").append(`<tr>
@@ -11,7 +10,6 @@ $((function () {
                                 <td>${thing[3]}</td>
                                 <td>${thing[4]}</td>
                                 <td>${thing[5]}</td>
-                                <td>${thing[6]}</td>
                                 <td>
                                     <a href=updateUser.php?id=${thing[0]}>Update</a>
                                     <br>
@@ -21,10 +19,10 @@ $((function () {
                                </tr>`)
             })
         })
-        $("#info").text(`The query has been done with the role "${role.val()}" and the name "${name.val()}"`)
+        $("#info").text(`The query has been done with the country "${role.val()}"`)
     }
 
-    $("#role, #name").on("input", function () {
+    $("#role").on("input", function () {
         refresh()
     })
 
