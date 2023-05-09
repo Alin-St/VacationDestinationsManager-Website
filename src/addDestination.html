@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add New User</title>
-    <link rel="stylesheet" type="text/css" href="addUser.css">
+    <link rel="stylesheet" type="text/css" href="addDestination.css">
 </head>
 
 <body>
@@ -11,7 +11,7 @@
     <h1>Create Vacation Destination</h1>
     <p><b>Please fill this form and submit to add the destination to the database.</b></p>
 
-    <form action="addUser.php" method="post">
+    <form action="addDestination.php" method="post">
         <input type="text" name="location_name" placeholder="Location Name:"> <br>
         <input type="text" name="country_name" placeholder="Country Name:"> <br>
         <input type="text" name="description" placeholder="Description:"> <br>
@@ -19,7 +19,7 @@
         <input type="number" name="estimated_cost" placeholder="Estimated Cost per Day:"> <br>
         <div class="button_container">
             <button type="submit">Add Vacation Destination</button>
-            <button type="reset" onclick="window.location.href='showUsers.html'">Cancel</button>
+            <button type="reset" onclick="window.location.href='showDestinations.html'">Cancel</button>
         </div>
     </form>
 </div>

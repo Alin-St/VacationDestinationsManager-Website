@@ -11,7 +11,7 @@ global $connection;
 $result = mysqli_query($connection, $sql_query);
 if ($result) {
     echo "Your destination was updated successfully!";
-    header("Location: showUsers.html");
+    header("Location: showDestinations.html");
 } else {
     echo "Oops!Something went wrong and your document cannot be added!Please try again later.";
 }

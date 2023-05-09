@@ -12,7 +12,7 @@ global $connection;
 $result = mysqli_query($connection, $sql_query);
 if ($result) {
     echo "Your destination was added successfully!";
-    header("Location: showUsers.html");
+    header("Location: showDestinations.html");
 } else {
     echo "Oops!Something went wrong and your destination cannot be added! Please try again later.";
 }

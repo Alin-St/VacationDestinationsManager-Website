@@ -1,7 +1,10 @@
 $((function () {
+    let currentPage = 1;
+    let totalPages = 1;
+
     function refresh() {
         let role = $("#role")
-        $.getJSON("showUsers.php", {role: role.val()}, function (json) {
+        $.getJSON("showDestinations.php", {role: role.val()}, function (json) {
             $("table tr:gt(0)").remove()
             json.forEach(function (thing) {
                 $("table").append(`<tr>
@@ -11,9 +14,9 @@ $((function () {
                                 <td>${thing[4]}</td>
                                 <td>${thing[5]}</td>
                                 <td>
-                                    <a href=updateUser.php?id=${thing[0]}>Update</a>
+                                    <a href=updateDestination.php?id=${thing[0]}>Update</a>
                                     <br>
-                                    <a href=deleteUser.php?id=${thing[0]}>Delete</a>
+                                    <a href=deleteDestination.php?id=${thing[0]}>Delete</a>
                                     <br>
                                 </td>
                                </tr>`)

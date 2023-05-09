@@ -7,7 +7,7 @@ if (isset($_POST['id']) && !empty(trim($_POST['id']))) {
     $result = mysqli_query($connection, $sql_query);
     if ($result) {
         echo "Your destination was deleted successfully!";
-        header("Location: showUsers.html");
+        header("Location: showDestinations.html");
     } else {
         echo "Oops! Something went wrong and your destination cannot be deleted! Please try again later.";
     }

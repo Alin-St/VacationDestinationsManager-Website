@@ -36,7 +36,7 @@ if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
     <meta charset="UTF-8">
     <title>Update Vacation Destination</title>
     <style>
-        <?php include "addUser.css" ?>
+        <?php include "addDestination.css" ?>
     </style>
 </head>
 
@@ -45,7 +45,7 @@ if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
     <h1>Update Vacation Destination</h1>
     <p><b>Please fill this form and submit to update the destination in the database.</b></p>
 
-    <form action="updateUserBackend.php" method="post">
+    <form action="updateDestinationBackend.php" method="post">
         <input type="hidden" name="id" value="<?php echo trim($_GET['id']); ?>">
         <input type="text" name="location_name" placeholder="Location Name:" value="<?php echo $location_name ?>"> <br>
         <input type="text" name="country_name" placeholder="Country Name:" value="<?php echo $country_name ?>"> <br>
@@ -54,7 +54,7 @@ if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
         <input type="number" name="estimated_cost" placeholder="Estimated Cost per Day:" value="<?php echo $estimated_cost ?>"> <br>
         <div class="button_container">
             <button type="submit">Update Vacation Destination</button>
-            <button type="reset" onclick="window.location.href='showUsers.html'">Cancel</button>
+            <button type="reset" onclick="window.location.href='showDestinations.html'">Cancel</button>
         </div>
     </form>
 </div>
