@@ -2,30 +2,26 @@
 require_once "utils/configuration.php";
 global $connection;
 $id = "";
-$name = "";
-$username = "";
-$password = "";
-$age = "";
-$role = "";
-$email = "";
-$webpage = "";
+$location_name = "";
+$country_name = "";
+$description = "";
+$tourist_targets = "";
+$estimated_cost = "";
 if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
     $id = trim($_GET['id']);
-    $sql_query = "select * from users where userID = $id;";
+    $sql_query = "select * from destinations where id = $id;";
     $result = mysqli_query($connection, $sql_query);
     if ($result) {
         $number_of_rows = mysqli_num_rows($result);
         if ($number_of_rows == 1) {
             $row = mysqli_fetch_array($result);
-            $name = $row['name'];
-            $username = $row['username'];
-            $password = $row['password'];
-            $age = $row['age'];
-            $role = $row['role'];
-            $email = $row['email'];
-            $webpage = $row['webpage'];
+            $location_name = $row['location_name'];
+            $country_name = $row['country_name'];
+            $description = $row['description'];
+            $tourist_targets = $row['tourist_targets'];
+            $estimated_cost = $row['estimated_cost_per_day'];
         } else {
-            die("Incorrect user id");
+            die("Incorrect destination id");
         }
     } else {
         die("Oops! Something went wrong and your document cannot be updated! Please try again later.");
@@ -38,7 +34,7 @@ if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Update User</title>
+    <title>Update Vacation Destination</title>
     <style>
         <?php include "addUser.css" ?>
     </style>
@@ -46,20 +42,18 @@ if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
 
 <body>
 <div class="container">
-    <h1>Update User</h1>
-    <p><b>Please fill this form and submit to update the user in the database.</b></p>
+    <h1>Update Vacation Destination</h1>
+    <p><b>Please fill this form and submit to update the destination in the database.</b></p>
 
     <form action="updateUserBackend.php" method="post">
         <input type="hidden" name="id" value="<?php echo trim($_GET['id']); ?>">
-        <input type="text" name="name" placeholder="Name:" value="<?php echo $name ?>"> <br>
-        <input type="text" name="username" placeholder="Username:" value="<?php echo $username ?>"> <br>
-        <input type="password" name="password" placeholder="Password:" value="<?php echo $password ?>"> <br>
-        <input type="number" name="age" placeholder="Age:" value="<?php echo $age ?>"> <br>
-        <input type="text" name="role" placeholder="Role:" value="<?php echo $role ?>"> <br>
-        <input type="text" name="email" placeholder="Email:" value="<?php echo $email ?>"> <br>
-        <input type="text" name="webpage" placeholder="Webpage:" value="<?php echo $webpage ?>"> <br>
+        <input type="text" name="location_name" placeholder="Location Name:" value="<?php echo $location_name ?>"> <br>
+        <input type="text" name="country_name" placeholder="Country Name:" value="<?php echo $country_name ?>"> <br>
+        <input type="text" name="description" placeholder="Description:" value="<?php echo $description ?>"> <br>
+        <input type="text" name="tourist_targets" placeholder="Tourist Targets:" value="<?php echo $tourist_targets ?>"> <br>
+        <input type="number" name="estimated_cost" placeholder="Estimated Cost per Day:" value="<?php echo $estimated_cost ?>"> <br>
         <div class="button_container">
-            <button type="submit">Update User</button>
+            <button type="submit">Update Vacation Destination</button>
             <button type="reset" onclick="window.location.href='showUsers.html'">Cancel</button>
         </div>
     </form>

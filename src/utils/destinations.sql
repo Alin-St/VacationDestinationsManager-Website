@@ -8,6 +8,16 @@ CREATE TABLE destinations (
                               PRIMARY KEY (id)
 );
 
+CREATE TABLE destinations (
+                              id INT NOT NULL AUTO_INCREMENT,
+                              location_name VARCHAR(255) NOT NULL,
+                              country_name VARCHAR(255) NOT NULL,
+                              description TEXT,
+                              tourist_targets TEXT,
+                              estimated_cost_per_day DECIMAL(10,2) NOT NULL CHECK (estimated_cost_per_day >= 0),
+                              PRIMARY KEY (id)
+);
+
 INSERT INTO destinations (location_name, country_name, description, tourist_targets, estimated_cost_per_day)
 VALUES
     ('Paris', 'France', 'The city of love', 'Eiffel Tower, Louvre Museum, Notre-Dame Cathedral', 100),
@@ -21,3 +31,5 @@ VALUES
     ('Manchester', 'United Kingdom', 'A vibrant city in northern England', 'Old Trafford, Manchester Cathedral, Northern Quarter', 80),
     ('Bath', 'United Kingdom', 'A city famous for its Roman baths', 'Roman Baths, Bath Abbey, Pulteney Bridge', 90),
     ('Rome', 'Italy', 'The eternal city', 'Colosseum, Vatican City, Trevi Fountain', 90);
+
+DROP TABLE destinations;

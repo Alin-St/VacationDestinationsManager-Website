@@ -4,15 +4,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Delete User</title>
+    <title>Delete Vacation Destination</title>
     <link rel="stylesheet" type="text/css" href="deleteUser.css">
 </head>
 
 <body>
-<h1>Delete User</h1>
+<h1>Delete Vacation Destination</h1>
 
 <div class="container">
-    <p><b>Are you sure you want to delete this user?</b></p>
+    <p><b>Are you sure you want to delete this vacation destination?</b></p>
 
     <form action="deleteUserBackend.php" method="post">
         <input type="hidden" name="id" value="<?php echo trim($_GET['id']); ?>">

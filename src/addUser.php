@@ -2,20 +2,18 @@
 $message = "Are you sure you want to continue?";
 echo "<script>confirm('$message')</script>";
 require_once "utils/configuration.php";
-$name = $_POST['name'];
-$username = $_POST['username'];
-$password = $_POST['password'];
-$age = $_POST['age'];
-$role = $_POST['role'];
-$email = $_POST['email'];
-$webpage = $_POST['webpage'];
-$sql_query = "insert into users(name, username, password, age, role, email, webpage) values ('$name', '$username', '$password', $age, '$role', '$email', '$webpage')";
+$location_name = $_POST['location_name'];
+$country_name = $_POST['country_name'];
+$description = $_POST['description'];
+$tourist_targets = $_POST['tourist_targets'];
+$estimated_cost = $_POST['estimated_cost'];
+$sql_query = "insert into destinations(location_name, country_name, description, tourist_targets, estimated_cost_per_day) values ('$location_name', '$country_name', '$description', '$tourist_targets', '$estimated_cost')";
 global $connection;
 $result = mysqli_query($connection, $sql_query);
 if ($result) {
-    echo "Your user was added successfully!";
+    echo "Your destination was added successfully!";
     header("Location: showUsers.html");
 } else {
-    echo "Oops!Something went wrong and your document cannot be added!Please try again later.";
+    echo "Oops!Something went wrong and your destination cannot be added! Please try again later.";
 }
 mysqli_close($connection);
