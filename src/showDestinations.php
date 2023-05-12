@@ -1,20 +1,49 @@
 <?php
 require_once 'utils/configuration.php';
-$sql_query = "SELECT * FROM destinations;";
+
+// Get the query parameters from the query string
+$country_name = $_GET['country_name'] ?? '';
+$count_only = isset($_GET['count']);
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ($page - 1) * 4;
+
+// Build the SQL query with the WHERE clause for the country_name filter and the LIMIT and OFFSET clauses for pagination
+$sql_query = $count_only ?
+    "SELECT COUNT(*) FROM destinations WHERE country_name LIKE '%$country_name%'" :
+    "SELECT * FROM destinations WHERE country_name LIKE '%$country_name%' LIMIT 4 OFFSET $offset";
+
+// Execute the query and check for errors
 global $connection;
 $result = mysqli_query($connection, $sql_query);
-
-if ($result) {
-    $number_of_rows = mysqli_num_rows($result);
-    $requested_users = array();
-    $role = $_GET["role"];
-    for ($i = 0; $i < $number_of_rows; $i++) {
-        $row = mysqli_fetch_array($result);
-        if (str_contains($row["country_name"], $role))
-            array_push($requested_users, array($row['id'], $row['location_name'], $row['country_name'],
-                $row['description'], $row['tourist_targets'], $row['estimated_cost_per_day']));
-    }
-    mysqli_free_result($result);
-    echo json_encode($requested_users);
+if (!$result) {
+    die('Error: ' . mysqli_error($connection));
 }
+
+if ($count_only) {
+    $row = mysqli_fetch_row($result);
+    $count = (int) $row[0];
+
+    // Return the number of matching destinations.
+    echo $count;
+}
+else {
+    // Loop over the result set and build the array of matching destinations
+    $requested_destinations = array();
+    while ($row = mysqli_fetch_array($result)) {
+        $requested_destinations[] = array(
+            $row['id'],
+            $row['location_name'],
+            $row['country_name'],
+            $row['description'],
+            $row['tourist_targets'],
+            $row['estimated_cost_per_day']
+        );
+    }
+
+    // Return the matching destinations for the requested page
+    echo json_encode($requested_destinations);
+}
+
+// Cleanup.
+mysqli_free_result($result);
 mysqli_close($connection);
