@@ -9,12 +9,27 @@ $offset = ($page - 1) * 4;
 
 // Build the SQL query with the WHERE clause for the country_name filter and the LIMIT and OFFSET clauses for pagination
 $sql_query = $count_only ?
-    "SELECT COUNT(*) FROM destinations WHERE country_name LIKE '%$country_name%'" :
-    "SELECT * FROM destinations WHERE country_name LIKE '%$country_name%' LIMIT 4 OFFSET $offset";
+    "SELECT COUNT(*) FROM destinations WHERE country_name LIKE ?" :
+    "SELECT * FROM destinations WHERE country_name LIKE ? LIMIT 4 OFFSET ?";
 
-// Execute the query and check for errors
+// Prepare the statement with the connection object and the query string
 global $connection;
-$result = mysqli_query($connection, $sql_query);
+$stmt = mysqli_prepare($connection, $sql_query);
+if (!$stmt) {
+    die('Error: ' . mysqli_error($connection));
+}
+
+// Bind the parameters to the statement
+$search_string = "%$country_name%";
+if ($count_only) {
+    mysqli_stmt_bind_param($stmt, "s", $search_string);
+} else {
+    mysqli_stmt_bind_param($stmt, "si", $search_string, $offset);
+}
+
+// Execute the statement and check for errors
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 if (!$result) {
     die('Error: ' . mysqli_error($connection));
 }
@@ -45,5 +60,5 @@ else {
 }
 
 // Cleanup.
-mysqli_free_result($result);
+mysqli_stmt_close($stmt);
 mysqli_close($connection);
