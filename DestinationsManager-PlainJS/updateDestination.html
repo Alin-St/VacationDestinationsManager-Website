@@ -1,18 +1,17 @@
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Add New User</title>
-    <link rel="stylesheet" type="text/css" href="addDestination.css">
-    <script src="addDestination.js"></script>
+    <meta charset="UTF-8"/>
+    <title>Update Vacation Destination</title>
+    <link rel="stylesheet" type="text/css" href="updateDestination.css"/>
+    <script src="updateDestination.js"></script>
 </head>
-
 <body>
 <div class="container">
-    <h1>Create Vacation Destination</h1>
-    <p><b>Please fill this form and submit to add the destination to the database.</b></p>
+    <h1>Update Vacation Destination</h1>
+    <p><b>Please fill this form and submit to update the destination in the database.</b></p>
 
-    <form id="addForm">
+    <form id="updateForm">
+        <input type="hidden" name="id" id="destination_id">
         <label>
             <input type="text" name="location_name" placeholder="Location Name:" id="location_name">
         </label> <br>
@@ -30,11 +29,10 @@
         </label> <br>
 
         <div class="button_container">
-            <button type="submit" onclick="addDestination()">Add Vacation Destination</button>
+            <button type="submit" onclick="updateDestination()">Update Vacation Destination</button>
             <button type="reset" onclick="goToShowDestinations()">Cancel</button>
         </div>
     </form>
 </div>
 </body>
-
 </html>

@@ -1,27 +1,30 @@
-<!DOCTYPE html>
+<?php
+require_once "utils/configuration.php";
 
-<html lang="en">
+global $connection;
 
-<head>
-    <meta charset="UTF-8">
-    <title>Delete Vacation Destination</title>
-    <link rel="stylesheet" type="text/css" href="deleteDestination.css">
-</head>
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    $id = $_GET['id'] ?? '';
 
-<body>
-<h1>Delete Vacation Destination</h1>
+    if (!empty($id)) {
+        // Create the prepared statement
+        $sql_query = "DELETE FROM destinations WHERE id = ?";
+        $stmt = mysqli_prepare($connection, $sql_query);
 
-<div class="container">
-    <p><b>Are you sure you want to delete this vacation destination?</b></p>
+        // Bind the parameter to the prepared statement
+        mysqli_stmt_bind_param($stmt, "i", $id);
 
-    <form action="deleteDestinationBackend.php" method="post">
-        <input type="hidden" name="id" value="<?php echo trim($_GET['id']); ?>">
-        <button type="submit" class="yes">YES</button>
-    </form>
-    <button class="no" onclick="window.location.href='showDestinations.html'">
-        NO
-    </button>
-</div>
-</body>
+        // Execute the statement and check for errors
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Your destination was deleted successfully!";
+            exit();
+        } else {
+            echo "Oops! Something went wrong and your destination cannot be deleted! Please try again later.";
+        }
 
-</html>
+        // Cleanup
+        mysqli_stmt_close($stmt);
+    }
+}
+
+mysqli_close($connection);

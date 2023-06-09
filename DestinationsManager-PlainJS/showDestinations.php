@@ -1,9 +1,14 @@
 <?php
 require_once 'utils/configuration.php';
 
+// This script has two working modes:
+// If count_only query parameter is set: returns the count of all entities matching the given filter
+// If count_only is not set or set to false: returns an array of arrays, representing the entities matching the given
+// filter, on the specified page (or page 1 if no page was specified).
+
 // Get the query parameters from the query string
 $country_name = $_GET['country_name'] ?? '';
-$count_only = isset($_GET['count']);
+$count_only = isset($_GET['count_only']) && $_GET['count_only'] !== 'false';
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($page - 1) * 4;
 
@@ -34,11 +39,12 @@ if (!$result) {
     die('Error: ' . mysqli_error($connection));
 }
 
+// If 'count_only' path variable is used, return the number of matching destinations, otherwise return the destinations
+// for the specified page.
 if ($count_only) {
+    // Return the number of matching destinations.
     $row = mysqli_fetch_row($result);
     $count = (int) $row[0];
-
-    // Return the number of matching destinations.
     echo $count;
 }
 else {

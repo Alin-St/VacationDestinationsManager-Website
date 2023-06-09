@@ -1,6 +1,4 @@
 <?php
-$message = "Are you sure you want to continue?";
-echo "<script>confirm('$message')</script>";
 require_once "utils/configuration.php";
 
 // Get the form data and sanitize it
@@ -21,9 +19,8 @@ mysqli_stmt_bind_param($stmt, "ssssd", $location_name, $country_name, $descripti
 // Execute the statement and check for errors
 if (mysqli_stmt_execute($stmt)) {
     echo "Your destination was added successfully!";
-    header("Location: showDestinations.html");
 } else {
-    echo "Oops! Something went wrong and your destination cannot be added! Please try again later.";
+    die("Oops! Something went wrong and your destination cannot be added! Please try again.");
 }
 
 // Cleanup

@@ -23,17 +23,18 @@ html, body {
     width: 80%;
     align-self: center;
     display: grid;
-    grid-template-columns: auto 23% 23% auto;
+    grid-template-columns: auto auto 23% 23% auto;
     padding: 15px;
+    align-items: center;
 }
 
-.details h1 {
+.details h1, .details label {
     text-align: center;
 }
 
 .details input {
     height: 50%;
-    margin: auto 30px;
+    margin: auto 30px auto 0;
     background-color: #fddcd1;
     color: black;
     border-radius: 10px;

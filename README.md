@@ -37,7 +37,7 @@ There are a few pages and dialogs not displayed here.
 
 1. Install XAMPP. You should have an Apache and MySql server running.
 2. Copy the project into the working directory (C:\xampp\htdocs).
-3. Set-up the database. There is a SQL script you can run to create the tables and add some data.
+3. Set-up the database. There is a SQL script inside the project that you can use to create the tables and add some data.
 4. Update database connection details if necessary.
-5. Go to localhost/VacationDestinationsManager-Website/DestinationsManager-PlainJS/showDestinations.html to test the PlainJS version
-6. For the Angular version you need to run "ng serve" command. Check Angular documentation for more details.
+5. In the browser, go to "[localhost/VacationDestinationsManager-Website/DestinationsManager-PlainJS/showDestinations.html](localhost/VacationDestinationsManager-Website/DestinationsManager-PlainJS/showDestinations.html)" to test the PlainJS version (the Apache server must be running).
+6. For the Angular version you need to run "ng serve" command in the project's directory. Check Angular documentation for more details.
